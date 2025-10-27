@@ -9,6 +9,7 @@ Process:
 3) Display the cost as text below the calculate button
 
 Widgets:
+
 1-AppBar
 
 2-Center
@@ -40,6 +41,7 @@ The application was tested with multiple input combinations, eg.
 3) Price and distance are entered correctly
 4) Efficiency is entered as 0
 5) All values are entered correctly
+
 Additionally, I used the Fuel Cost Calculator online to confirm that results and unit conversion were calculated correctly.
 
 Authorship Note with signature:
