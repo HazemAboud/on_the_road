@@ -4,7 +4,9 @@ This app is used to calculate the estimated cost of your trip based on distance,
 
 Process:
 
-The user inputs distance (miles or km), efficiency (km/l or mile/l), and price (RM/L). Verify that the input is numerical and greater than 0, then calculate the cost using the formula distance/efficiency * price. Display the cost as text below the calculate button. 
+1) The user inputs distance (miles or km), efficiency (km/l or mile/l), and price (RM/L).
+2) Verify that the input is numerical and greater than 0, then calculate the cost using the formula distance/efficiency * price.
+3) Display the cost as text below the calculate button. 
 
 Widgets:
 
@@ -68,4 +70,5 @@ Output:
 
 
 ![alt text](image-8.png)
+
 
