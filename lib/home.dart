@@ -28,156 +28,183 @@ class _HomeState extends State<Home> {
         foregroundColor: Colors.white,
       ),
       body: Center(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            width: width * 0.8,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
-                  child: Image.asset('assets/fuel.png', scale: 2),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      child: TextField(
-                        controller: dist,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter Distance',
-                          errorText: dInvalid ? 'Invalid Input' : null
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    SizedBox(
-                      width: 100,
-                      child: DropdownButton<String>(
-                        value: selectedDistance,
-                        items: [
-                          DropdownMenuItem(
-                            value: 'Kilometer',
-                            child: Text('Kilometer'),
-                          ),
-                          DropdownMenuItem(value: 'Mile', child: Text('Mile')),
-                        ],
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            selectedDistance = newValue!;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      child: TextField(
-                        controller: eff,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter Efficiency',
-                          errorText: eInvalid ? 'Invalid Input' : null
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    SizedBox(
-                      width: 100,
-                      child: DropdownButton<String>(
-                        value: selectedEfficency,
-                        items: [
-                          DropdownMenuItem(value: 'KmL', child: Text('Km/L')),
-                          DropdownMenuItem(
-                            value: 'MileL',
-                            child: Text('Mile/L'),
-                          ),
-                        ],
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            selectedEfficency = newValue!;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 180,
-                      child: TextField(
-                        controller: pc,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter Price',
-                          errorText: pInvalid ? 'Invalid Input' : null
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    SizedBox(
-                      width: 100,
-                      child: Text('RM/L', style: TextStyle(fontSize: 15.5, fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: 200,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      double distance = double.tryParse(dist.text) ?? 0;
-                      double efficiency = double.tryParse(eff.text) ?? 0;
-                      double price = double.tryParse(pc.text) ?? 0;
-                      if(distance ==0 || efficiency ==0 || price ==0){
-                        if(distance ==0){
-                        dInvalid = true;
-                        }else{
-                          dInvalid = false;
-                        }
-                        if(efficiency==0){
-                          eInvalid = true;
-                        }else{
-                          eInvalid = false;
-                        }
-                        if(price ==0){
-                          pInvalid = true;
-                        }else{
-                          pInvalid = false;
-                        }
-                      }else{
-                        dInvalid = false;
-                        eInvalid = false;
-                        pInvalid = false;
-                        result = calculate(distance, efficiency, price);
-                      }
-                      setState(() {});
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 235, 228, 228),
-                      foregroundColor: Colors.deepOrangeAccent,
-                    ),
-                    child: Text('Calculate'),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade200,
+                blurRadius: 20.0,
+                spreadRadius: 20.0,
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: width * 0.8,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+                    child: Image.asset('assets/fuel.png', scale: 2),
                   ),
-                ),
-                SizedBox(height: 10),
-                if (result.isNotEmpty)
-                  Text(result, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 180,
+                        child: TextField(
+                          controller: dist,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Enter Distance',
+                            errorText: dInvalid ? 'Invalid Input' : null,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      SizedBox(
+                        width: 100,
+                        child: DropdownButton<String>(
+                          value: selectedDistance,
+                          items: [
+                            DropdownMenuItem(
+                              value: 'Kilometer',
+                              child: Text('Kilometer'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Mile',
+                              child: Text('Mile'),
+                            ),
+                          ],
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedDistance = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 180,
+                        child: TextField(
+                          controller: eff,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Enter Efficiency',
+                            errorText: eInvalid ? 'Invalid Input' : null,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      SizedBox(
+                        width: 100,
+                        child: DropdownButton<String>(
+                          value: selectedEfficency,
+                          items: [
+                            DropdownMenuItem(value: 'KmL', child: Text('Km/L')),
+                            DropdownMenuItem(
+                              value: 'MileL',
+                              child: Text('Mile/L'),
+                            ),
+                          ],
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedEfficency = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 180,
+                        child: TextField(
+                          controller: pc,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Enter Price',
+                            errorText: pInvalid ? 'Invalid Input' : null,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      SizedBox(
+                        width: 100,
+                        child: Text(
+                          'RM/L',
+                          style: TextStyle(
+                            fontSize: 15.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    width: 200,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        double distance = double.tryParse(dist.text) ?? 0;
+                        double efficiency = double.tryParse(eff.text) ?? 0;
+                        double price = double.tryParse(pc.text) ?? 0;
+                        //display error only for the field with missing or wrong value field
+                        if (distance == 0 || efficiency == 0 || price == 0) {
+                          if (distance == 0) {
+                            dInvalid = true;
+                          } else {
+                            dInvalid = false;
+                          }
+                          if (efficiency == 0) {
+                            eInvalid = true;
+                          } else {
+                            eInvalid = false;
+                          }
+                          if (price == 0) {
+                            pInvalid = true;
+                          } else {
+                            pInvalid = false;
+                          }
+                        } else {
+                          dInvalid = false;
+                          eInvalid = false;
+                          pInvalid = false;
+                          result = calculate(distance, efficiency, price);
+                        }
+                        setState(() {});
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 235, 228, 228),
+                        foregroundColor: Colors.deepOrangeAccent,
+                      ),
+                      child: Text('Calculate'),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  if (result.isNotEmpty)
+                    Text(
+                      result,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -186,6 +213,7 @@ class _HomeState extends State<Home> {
   }
 
   String calculate(double distance, double efficiency, double price) {
+    //convert all values to Km
     if (selectedDistance == 'Mile') {
       distance = distance * 1.60934;
     }
@@ -194,6 +222,6 @@ class _HomeState extends State<Home> {
     }
     double cost = distance / efficiency * price;
 
-    return "The estimated cost of your trip is RM" + cost.toStringAsFixed(2);
+    return "The estimated cost of your trip is RM${cost.toStringAsFixed(2)}";
   }
 }
